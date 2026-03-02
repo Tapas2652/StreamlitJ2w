@@ -45,15 +45,25 @@ PODS = [
     ("p-svc",       "🤝","Services",                        "310", False,"Managed Services · Professional Services · Consulting Services"),
 ]
 
-# Chart data (bar chart – POD headcount, top 12 for readability)
-CHART_PODS = [p for p in PODS if p[0] not in ("p-ites","p-svc")]  # exclude huge ITES/Services
-CHART_LABELS = [p[2] for p in CHART_PODS]
-CHART_VALUES = [int(p[3]) for p in CHART_PODS]
-CHART_JOINED = [p[4] for p in CHART_PODS]
+# Location distribution data
+LOCATIONS = [
+    {"city": "Bangalore",  "count": 1142, "pct": 36.1, "color": "#3b82f6"},
+    {"city": "Hyderabad",  "count":  634, "pct": 20.0, "color": "#10b981"},
+    {"city": "Mumbai",     "count":  412, "pct": 13.0, "color": "#f97316"},
+    {"city": "Noida",      "count":  318, "pct": 10.0, "color": "#a855f7"},
+    {"city": "Lucknow",    "count":  190, "pct":  6.0, "color": "#f59e0b"},
+    {"city": "Others",     "count":  472, "pct": 14.9, "color": "#64748b"},
+]
 
-# Donut data
-JOINED_TODAY_PODS = sum(1 for p in PODS if p[4])
-NO_JOINER_PODS    = len(PODS) - JOINED_TODAY_PODS
+# Experience distribution data
+EXPERIENCE = [
+    {"band": "0 – 1 Year",   "count":  285, "pct":  9.0, "color": "#22d3ee"},
+    {"band": "1 – 3 Years",  "count":  634, "pct": 20.0, "color": "#3b82f6"},
+    {"band": "3 – 5 Years",  "count":  792, "pct": 25.0, "color": "#10b981"},
+    {"band": "5 – 7 Years",  "count":  698, "pct": 22.0, "color": "#a855f7"},
+    {"band": "7 – 10 Years", "count":  507, "pct": 16.0, "color": "#f97316"},
+    {"band": "10 + Years",   "count":  252, "pct":  8.0, "color": "#f59e0b"},
+]
 
 def build_dashboard_html():
     joiner_rows = ""
@@ -84,29 +94,55 @@ def build_dashboard_html():
           </div>
         </div>"""
 
-    # Bar chart data
-    bar_labels = [p[2] for p in PODS if p[0] not in ("p-ites","p-svc")]
-    bar_values = [int(p[3]) for p in PODS if p[0] not in ("p-ites","p-svc")]
-    bar_colors = ["#3fb950" if p[4] else "#58a6ff" for p in PODS if p[0] not in ("p-ites","p-svc")]
-    # shorten labels
-    short_labels = [l.replace("& ","").replace("and ","")[:16] for l in bar_labels]
+    # Location table rows
+    loc_rows = ""
+    for i, loc in enumerate(LOCATIONS):
+        bar_w = loc["pct"] / max(l["pct"] for l in LOCATIONS) * 100
+        loc_rows += f"""
+        <tr>
+          <td style="padding:11px 14px;border-bottom:1px solid #21262d44;color:#c9d1d9;vertical-align:middle;">
+            <span style="display:inline-flex;align-items:center;gap:8px;">
+              <span style="width:10px;height:10px;border-radius:50%;background:{loc['color']};flex-shrink:0;display:inline-block;"></span>
+              <strong style="color:#f0f6fc;">{loc['city']}</strong>
+            </span>
+          </td>
+          <td style="padding:11px 14px;border-bottom:1px solid #21262d44;vertical-align:middle;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="flex:1;height:16px;background:#21262d;border-radius:4px;overflow:hidden;">
+                <div style="width:{bar_w:.1f}%;height:100%;background:{loc['color']};border-radius:4px;animation:bar-grow .9s ease-out forwards;animation-delay:{i*0.08:.2f}s;"></div>
+              </div>
+            </div>
+          </td>
+          <td style="padding:11px 14px;border-bottom:1px solid #21262d44;color:#f0f6fc;font-weight:700;font-size:14px;text-align:right;vertical-align:middle;">{loc['count']:,}</td>
+          <td style="padding:11px 14px;border-bottom:1px solid #21262d44;text-align:right;vertical-align:middle;">
+            <span style="background:#21262d;color:{loc['color']};border:1px solid {loc['color']}44;border-radius:5px;padding:3px 9px;font-size:11px;font-weight:700;">{loc['pct']}%</span>
+          </td>
+        </tr>"""
 
-    bars_html = ""
-    max_val = max(bar_values)
-    for i,(lbl,val,col) in enumerate(zip(short_labels,bar_values,bar_colors)):
-        pct = val/max_val*100
-        bars_html += f"""
-        <div class="bar-row">
-          <div class="bar-lbl">{lbl}</div>
-          <div class="bar-track">
-            <div class="bar-fill" style="width:{pct:.1f}%;background:{col};animation-delay:{i*0.06:.2f}s"></div>
-          </div>
-          <div class="bar-val">{val}</div>
-        </div>"""
-
-    # Donut data for JS
-    joined_pods = sum(1 for p in PODS if p[4])
-    nojoin_pods = len(PODS) - joined_pods
+    # Experience table rows
+    exp_rows = ""
+    for i, exp in enumerate(EXPERIENCE):
+        bar_w = exp["pct"] / max(e["pct"] for e in EXPERIENCE) * 100
+        exp_rows += f"""
+        <tr>
+          <td style="padding:11px 14px;border-bottom:1px solid #21262d44;color:#c9d1d9;vertical-align:middle;">
+            <span style="display:inline-flex;align-items:center;gap:8px;">
+              <span style="width:10px;height:10px;border-radius:3px;background:{exp['color']};flex-shrink:0;display:inline-block;"></span>
+              <strong style="color:#f0f6fc;">{exp['band']}</strong>
+            </span>
+          </td>
+          <td style="padding:11px 14px;border-bottom:1px solid #21262d44;vertical-align:middle;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="flex:1;height:16px;background:#21262d;border-radius:4px;overflow:hidden;">
+                <div style="width:{bar_w:.1f}%;height:100%;background:{exp['color']};border-radius:4px;animation:bar-grow .9s ease-out forwards;animation-delay:{i*0.08:.2f}s;"></div>
+              </div>
+            </div>
+          </td>
+          <td style="padding:11px 14px;border-bottom:1px solid #21262d44;color:#f0f6fc;font-weight:700;font-size:14px;text-align:right;vertical-align:middle;">{exp['count']:,}</td>
+          <td style="padding:11px 14px;border-bottom:1px solid #21262d44;text-align:right;vertical-align:middle;">
+            <span style="background:#21262d;color:{exp['color']};border:1px solid {exp['color']}44;border-radius:5px;padding:3px 9px;font-size:11px;font-weight:700;">{exp['pct']}%</span>
+          </td>
+        </tr>"""
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -127,7 +163,6 @@ body{{font-family:'Inter','Segoe UI',sans-serif;background:#0e1117;color:#fafafa
 @keyframes glow-text{{0%,100%{{text-shadow:0 0 0 rgba(63,185,80,0);}}50%{{text-shadow:0 0 14px rgba(63,185,80,.6);}}}}
 @keyframes bar-grow{{from{{width:0;}}}}
 @keyframes fadeIn{{from{{opacity:0;transform:translateY(8px);}}to{{opacity:1;transform:none;}}}}
-@keyframes donut-spin{{from{{stroke-dashoffset:283;}}}}
 
 /* ── TOPBAR ── */
 .topbar{{display:flex;align-items:center;justify-content:space-between;padding:14px 0 12px;border-bottom:1px solid #21262d;margin-bottom:22px;}}
@@ -187,30 +222,16 @@ body{{font-family:'Inter','Segoe UI',sans-serif;background:#0e1117;color:#fafafa
 .client-tag{{background:#1f3a5f;color:#58a6ff;border:1px solid #1f6feb44;border-radius:5px;padding:2px 8px;font-size:11px;font-weight:600;white-space:nowrap;}}
 .badge-joined{{background:#1a2d1a;color:#3fb950;border:1px solid #2ea04344;border-radius:6px;padding:3px 9px;font-size:11px;font-weight:700;white-space:nowrap;animation:joined-glow 2s ease-in-out infinite;display:inline-block;}}
 
-/* ── CHARTS SECTION ── */
-.charts-row{{display:grid;grid-template-columns:1fr 320px;gap:16px;margin-bottom:28px;}}
-.chart-box{{background:#161b22;border:1px solid #21262d;border-radius:10px;padding:18px 20px;}}
-.chart-title{{font-size:12px;font-weight:700;color:#8b949e;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;}}
-
-/* bar chart */
-.bar-row{{display:flex;align-items:center;gap:10px;margin-bottom:9px;}}
-.bar-lbl{{font-size:10px;color:#8b949e;width:130px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:right;}}
-.bar-track{{flex:1;height:18px;background:#21262d;border-radius:4px;overflow:hidden;}}
-.bar-fill{{height:100%;border-radius:4px;animation:bar-grow .9s ease-out forwards;}}
-.bar-val{{font-size:11px;font-weight:700;color:#f0f6fc;width:32px;text-align:right;flex-shrink:0;}}
-
-/* donut chart */
-.donut-wrap{{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;}}
-.donut-svg{{overflow:visible;}}
-.donut-bg{{fill:none;stroke:#21262d;stroke-width:28;}}
-.donut-arc1{{fill:none;stroke:#3fb950;stroke-width:28;stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;animation:donut-spin .9s ease-out forwards;}}
-.donut-arc2{{fill:none;stroke:#30363d;stroke-width:28;stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;}}
-.donut-label{{font-size:11px;fill:#8b949e;text-anchor:middle;}}
-.donut-num{{font-size:22px;font-weight:800;fill:#f0f6fc;text-anchor:middle;}}
-.donut-legend{{display:flex;gap:18px;margin-top:14px;flex-wrap:wrap;justify-content:center;}}
-.legend-item{{display:flex;align-items:center;gap:6px;font-size:11px;color:#8b949e;}}
-.legend-dot{{width:10px;height:10px;border-radius:50%;flex-shrink:0;}}
-.donut-pct{{font-size:12px;fill:#8b949e;text-anchor:middle;}}
+/* ── DIST TABLES ── */
+.dist-row{{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px;}}
+.dist-box{{background:#161b22;border:1px solid #21262d;border-radius:10px;overflow:hidden;}}
+.dist-thead tr{{background:#21262d;}}
+.dist-thead th{{padding:11px 14px;text-align:left;font-size:11px;font-weight:600;color:#8b949e;text-transform:uppercase;letter-spacing:.8px;white-space:nowrap;}}
+.dist-thead th:nth-child(3),.dist-thead th:nth-child(4){{text-align:right;}}
+.dist-tbody tr:hover td{{background:#1c2128;}}
+.dist-tbody tr:last-child td{{border-bottom:none!important;}}
+.dist-total{{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#1c2128;border-top:1px solid #21262d;font-size:12px;color:#8b949e;}}
+.dist-total strong{{color:#f0f6fc;font-size:14px;}}
 
 /* ── POD GRID ── */
 .pod-grid{{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:28px;}}
@@ -320,53 +341,60 @@ body{{font-family:'Inter','Segoe UI',sans-serif;background:#0e1117;color:#fafafa
   </table>
 </div>
 
-<!-- CHARTS -->
-<div class="sec-hdr">&#128202; Analytics Overview</div>
-<div class="charts-row">
-  <!-- Bar chart -->
-  <div class="chart-box">
-    <div class="chart-title">&#128202; POD Headcount (Excluding ITES &amp; Services)</div>
-    <div style="font-size:10px;color:#6e7681;margin-bottom:12px;">
-      <span style="display:inline-flex;align-items:center;gap:5px;margin-right:14px;"><span style="width:10px;height:10px;border-radius:2px;background:#3fb950;display:inline-block;"></span>Has joiner today</span>
-      <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#58a6ff;display:inline-block;"></span>No joiner today</span>
+<!-- LOCATION & EXPERIENCE DISTRIBUTION -->
+<div class="sec-hdr">&#128205; Location &amp; Experience Distribution</div>
+<div class="dist-row">
+
+  <!-- LOCATION TABLE -->
+  <div class="dist-box">
+    <div style="padding:14px 16px 10px;border-bottom:1px solid #21262d44;display:flex;align-items:center;gap:8px;">
+      <span style="font-size:16px;">&#128205;</span>
+      <span style="font-size:12px;font-weight:700;color:#8b949e;text-transform:uppercase;letter-spacing:1px;">Top Locations</span>
     </div>
-    {bars_html}
-  </div>
-  <!-- Donut chart -->
-  <div class="chart-box donut-wrap" style="justify-content:flex-start;padding:18px 20px;">
-    <div class="chart-title" style="margin-bottom:12px;">&#127775; POD Activity — Today</div>
-    <div style="display:flex;flex-direction:column;align-items:center;flex:1;justify-content:center;">
-      <svg class="donut-svg" width="160" height="160" viewBox="0 0 100 100">
-        <!-- bg ring -->
-        <circle class="donut-bg" cx="50" cy="50" r="45"/>
-        <!-- joined arc  (joined={joined_pods}/18 → dashoffset = 283*(1 - frac)) -->
-        <circle class="donut-arc2" cx="50" cy="50" r="45"
-          stroke-dasharray="283" stroke-dashoffset="0"/>
-        <circle class="donut-arc1" cx="50" cy="50" r="45"
-          stroke-dasharray="283"
-          stroke-dashoffset="{283*(1-joined_pods/18):.1f}"
-          style="animation:donut-spin .9s ease-out forwards;"/>
-        <text class="donut-num" x="50" y="46">{joined_pods}</text>
-        <text class="donut-pct" x="50" y="58">of 18 PODs</text>
-        <text class="donut-label" x="50" y="70">had joiners today</text>
-      </svg>
-      <div class="donut-legend">
-        <div class="legend-item"><div class="legend-dot" style="background:#3fb950;"></div>With joiner ({joined_pods})</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#30363d;"></div>No joiner ({18-joined_pods})</div>
-      </div>
-    </div>
-    <!-- mini stats -->
-    <div style="width:100%;margin-top:16px;border-top:1px solid #21262d;padding-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-      <div style="background:#1a2d1a;border:1px solid #2ea04333;border-radius:8px;padding:10px;text-align:center;">
-        <div style="font-size:10px;color:#8b949e;text-transform:uppercase;letter-spacing:.6px;">Avg HC/POD</div>
-        <div style="font-size:20px;font-weight:800;color:#3fb950;margin-top:3px;">176</div>
-      </div>
-      <div style="background:#1a1f2d;border:1px solid #1f6feb26;border-radius:8px;padding:10px;text-align:center;">
-        <div style="font-size:10px;color:#8b949e;text-transform:uppercase;letter-spacing:.6px;">Joiner Rate</div>
-        <div style="font-size:20px;font-weight:800;color:#58a6ff;margin-top:3px;">28%</div>
-      </div>
+    <table style="width:100%;border-collapse:collapse;">
+      <thead class="dist-thead">
+        <tr>
+          <th>City</th>
+          <th style="min-width:120px;">Distribution</th>
+          <th>Headcount</th>
+          <th>Share</th>
+        </tr>
+      </thead>
+      <tbody class="dist-tbody">
+        {loc_rows}
+      </tbody>
+    </table>
+    <div class="dist-total">
+      <span>Total Workforce</span>
+      <strong>3,168</strong>
     </div>
   </div>
+
+  <!-- EXPERIENCE TABLE -->
+  <div class="dist-box">
+    <div style="padding:14px 16px 10px;border-bottom:1px solid #21262d44;display:flex;align-items:center;gap:8px;">
+      <span style="font-size:16px;">&#9203;</span>
+      <span style="font-size:12px;font-weight:700;color:#8b949e;text-transform:uppercase;letter-spacing:1px;">Experience Bands</span>
+    </div>
+    <table style="width:100%;border-collapse:collapse;">
+      <thead class="dist-thead">
+        <tr>
+          <th>Experience</th>
+          <th style="min-width:120px;">Distribution</th>
+          <th>Headcount</th>
+          <th>Share</th>
+        </tr>
+      </thead>
+      <tbody class="dist-tbody">
+        {exp_rows}
+      </tbody>
+    </table>
+    <div class="dist-total">
+      <span>Total Workforce</span>
+      <strong>3,168</strong>
+    </div>
+  </div>
+
 </div>
 
 <!-- POD GRID -->
@@ -511,7 +539,7 @@ with st.sidebar:
     </div>
     <!-- Name below avatar -->
     <div style='font-size:14px;font-weight:700;color:#f0f6fc;'>Talent Intelligence</div>
-    <div style='font-size:11px;color:#8b949e;margin-top:3px;'>Founder&#8217;s Office &nbsp;&#183;&nbsp; Onboarding Competancy</div>
+    <div style='font-size:11px;color:#8b949e;margin-top:3px;'>Founder&#8217;s Office &nbsp;&#183;&nbsp; HR Analytics</div>
   </div>
   <div class='s-sec'>REPORT INFO</div>
   <div class='s-row'><span class='s-lbl'>Date</span><span class='s-val'>02 Mar 2026</span></div>
@@ -531,4 +559,4 @@ with st.sidebar:
 """, unsafe_allow_html=True)
 
 html_content = build_dashboard_html()
-components.html(html_content, height=5200, scrolling=False)
+components.html(html_content, height=5400, scrolling=False)
