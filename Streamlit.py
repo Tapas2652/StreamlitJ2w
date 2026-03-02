@@ -511,7 +511,7 @@ with st.sidebar:
     </div>
     <!-- Name below avatar -->
     <div style='font-size:14px;font-weight:700;color:#f0f6fc;'>Talent Intelligence</div>
-    <div style='font-size:11px;color:#8b949e;margin-top:3px;'>Founder&#8217;s Office &nbsp;&#183;&nbsp; HR Analytics</div>
+    <div style='font-size:11px;color:#8b949e;margin-top:3px;'>Founder&#8217;s Office &nbsp;&#183;&nbsp; Onboarding Competancy</div>
   </div>
   <div class='s-sec'>REPORT INFO</div>
   <div class='s-row'><span class='s-lbl'>Date</span><span class='s-val'>02 Mar 2026</span></div>
