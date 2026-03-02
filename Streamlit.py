@@ -718,7 +718,7 @@ def build_mtd_html():
         </tr>"""
 
     def domain_total_html(r):
-        return f"""<tr style="background:#fef9c3;font-weight:700;border-top:2px solid #ca8a04;">
+        return f"""<tr style="background:#ffff;font-weight:700;border-top:2px solid #ca8a04;">
           <td style="color:#92400e;padding:10px 14px;">{r['label']}</td>
           <td style="text-align:center;color:#92400e;">{r['ob_hc']}</td>
           <td style="text-align:center;color:#92400e;">{plain(r['ob_po'])}</td>
