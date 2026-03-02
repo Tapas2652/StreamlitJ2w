@@ -464,58 +464,64 @@ GLOBAL_CSS = """
 html,body,[data-testid="stAppViewContainer"],[data-testid="stMain"]{background:#0e1117!important;color:#fafafa;font-family:'Inter','Segoe UI',sans-serif;}
 [data-testid="stSidebar"]{background:#161b22!important;border-right:1px solid #21262d;transition:all 0.3s ease;}
 [data-testid="stSidebar"] *{color:#c9d1d9!important;}
-#MainMenu,footer,header{visibility:hidden;}
+#MainMenu,footer{visibility:hidden;}
+header{visibility:hidden;}
 [data-testid="stDecoration"]{display:none;}
 iframe{border:none!important;}
 
-/* ── Sidebar collapse toggle button (the << >> arrow) ── */
+/* ── collapsedControl must NEVER be hidden ── */
+[data-testid="collapsedControl"],
+[data-testid="collapsedControl"] *,
+[data-testid="stSidebarCollapseButton"],
+[data-testid="stSidebarCollapseButton"] * {
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: flex !important;
+    pointer-events: auto !important;
+}
+
+/* ── Sidebar collapse toggle button styling ── */
 [data-testid="stSidebarCollapseButton"] button,
 [data-testid="collapsedControl"] button {
-    background: #161b22 !important;
-    border: 1px solid #30363d !important;
+    background: #1f6feb !important;
+    border: 2px solid #58a6ff !important;
     border-radius: 50% !important;
     width: 36px !important;
     height: 36px !important;
-    color: #58a6ff !important;
-    font-size: 16px !important;
+    color: #fff !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    box-shadow: 0 0 0 2px #21262d, 0 2px 8px rgba(0,0,0,0.4) !important;
-    transition: background 0.2s, box-shadow 0.2s !important;
+    box-shadow: 0 0 12px rgba(31,111,235,0.6) !important;
     padding: 0 !important;
     opacity: 1 !important;
     visibility: visible !important;
     pointer-events: auto !important;
-    z-index: 9999 !important;
-    position: relative !important;
-}
-[data-testid="stSidebarCollapseButton"] button:hover,
-[data-testid="collapsedControl"] button:hover {
-    background: #1f6feb !important;
-    box-shadow: 0 0 0 2px #21262d, 0 0 12px rgba(31,111,235,0.5) !important;
-    color: #fff !important;
+    z-index: 99999 !important;
+    position: fixed !important;
+    cursor: pointer !important;
 }
 [data-testid="stSidebarCollapseButton"] button svg,
 [data-testid="collapsedControl"] button svg {
-    color: #58a6ff !important;
-    fill: #58a6ff !important;
-    width: 16px !important;
-    height: 16px !important;
-}
-[data-testid="stSidebarCollapseButton"] button:hover svg,
-[data-testid="collapsedControl"] button:hover svg {
     fill: #fff !important;
     color: #fff !important;
+    width: 16px !important;
+    height: 16px !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: block !important;
 }
-/* floating collapsed button — always visible */
+/* position the re-open button when sidebar is collapsed */
 [data-testid="collapsedControl"] {
-    top: 14px !important;
-    left: 8px !important;
+    position: fixed !important;
+    top: 50% !important;
+    left: 0px !important;
+    transform: translateY(-50%) !important;
+    z-index: 99999 !important;
     opacity: 1 !important;
     visibility: visible !important;
     display: flex !important;
-    z-index: 9999 !important;
+    pointer-events: auto !important;
 }
 
 /* sidebar inner content spacing */
@@ -535,22 +541,34 @@ iframe{border:none!important;}
 
 st.markdown(GLOBAL_CSS, unsafe_allow_html=True)
 
-# Enhance the built-in Streamlit sidebar toggle button with JS
+# Aggressive JS fix — watches DOM forever and ensures collapsed button stays visible & clickable
 st.markdown("""
 <script>
 (function() {
-    function styleToggleBtn() {
-        // Style the collapse button (« when open)
-        var btns = document.querySelectorAll(
-            '[data-testid="stSidebarCollapseButton"] button, [data-testid="collapsedControl"] button'
-        );
-        btns.forEach(function(btn) {
-            btn.title = "Toggle Sidebar";
+    function fixCollapsedBtn() {
+        var selectors = [
+            '[data-testid="collapsedControl"]',
+            '[data-testid="collapsedControl"] button',
+            '[data-testid="stSidebarCollapseButton"] button'
+        ];
+        selectors.forEach(function(sel) {
+            var els = document.querySelectorAll(sel);
+            els.forEach(function(el) {
+                el.style.setProperty('opacity',       '1',      'important');
+                el.style.setProperty('visibility',    'visible','important');
+                el.style.setProperty('display',       'flex',   'important');
+                el.style.setProperty('pointer-events','auto',   'important');
+                el.style.setProperty('z-index',       '99999',  'important');
+            });
         });
     }
-    // run after DOM ready
-    setTimeout(styleToggleBtn, 500);
-    setTimeout(styleToggleBtn, 1500);
+
+    // Run immediately, then on interval, then watch DOM changes
+    fixCollapsedBtn();
+    setInterval(fixCollapsedBtn, 500);
+
+    var observer = new MutationObserver(fixCollapsedBtn);
+    observer.observe(document.body, { childList: true, subtree: true, attributes: true });
 })();
 </script>
 """, unsafe_allow_html=True)
