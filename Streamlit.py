@@ -322,25 +322,25 @@ body{{font-family:'Inter','Segoe UI',sans-serif;background:#0e1117;color:#fafafa
 
 <!-- FINANCIAL METRICS -->
 <div class="metrics-row" style="margin-top:-8px;">
-  <div class="metric" style="border-color:#f97316 44;background:linear-gradient(135deg,#1f1a13,#201d14);border-top:2px solid #f97316;">
-    <div class="metric-lbl" style="color:#f97316;">Today's PO Value</div>
-    <div class="metric-val" style="color:#f0f6fc;font-size:26px;">&#8377;4.43 L</div>
-    <div class="metric-delta" style="color:#f97316;font-size:11px;">&#9650; Based on 5 joiners today</div>
-  </div>
-  <div class="metric" style="border-color:#22c55e44;background:linear-gradient(135deg,#161d16,#18221a);border-top:2px solid #22c55e;">
-    <div class="metric-lbl" style="color:#22c55e;">Today's Margin</div>
-    <div class="metric-val" style="color:#f0f6fc;font-size:26px;">&#8377;1.33 L</div>
-    <div class="metric-delta" style="color:#22c55e;font-size:11px;">&#8776; 30% on today's PO</div>
+  <div class="metric" style="border-color:#f9731644;background:linear-gradient(135deg,#1f1a13,#201d14);border-top:2px solid #f97316;">
+    <div class="metric-lbl" style="color:#f97316;">Today's OB PO Value</div>
+    <div class="metric-val" style="color:#f0f6fc;font-size:26px;">&#8377;12.5 L</div>
+    <div class="metric-delta" style="color:#8b949e;font-size:11px;font-weight:500;">Margin: <strong style="color:#22c55e;">&#8377;4.2 L</strong> &nbsp;&#183;&nbsp; Based on 5 joiners</div>
   </div>
   <div class="metric" style="border-color:#a855f744;background:linear-gradient(135deg,#1a1620,#1d1924);border-top:2px solid #a855f7;">
-    <div class="metric-lbl" style="color:#a855f7;">MTD PO Value</div>
-    <div class="metric-val" style="color:#f0f6fc;font-size:26px;">&#8377;20.38 L</div>
-    <div class="metric-delta" style="color:#a855f7;font-size:11px;">&#9650; Based on 23 MTD joiners</div>
+    <div class="metric-lbl" style="color:#a855f7;">MTD OB PO Value</div>
+    <div class="metric-val" style="color:#f0f6fc;font-size:26px;">&#8377;80 L</div>
+    <div class="metric-delta" style="color:#8b949e;font-size:11px;font-weight:500;">MTD Margin: <strong style="color:#22c55e;">&#8377;27 L</strong> &nbsp;&#183;&nbsp; 23 joiners</div>
   </div>
-  <div class="metric" style="border-color:#06b6d444;background:linear-gradient(135deg,#131d1f,#14202200);border-top:2px solid #06b6d4;">
-    <div class="metric-lbl" style="color:#06b6d4;">MTD Margin</div>
-    <div class="metric-val" style="color:#f0f6fc;font-size:26px;">&#8377;6.11 L</div>
-    <div class="metric-delta" style="color:#06b6d4;font-size:11px;">&#8776; 30% on MTD PO</div>
+  <div class="metric" style="border-color:#f59e0b44;background:linear-gradient(135deg,#1f1c13,#201e15);border-top:2px solid #f59e0b;">
+    <div class="metric-lbl" style="color:#f59e0b;">Total PO Value</div>
+    <div class="metric-val" style="color:#f0f6fc;font-size:26px;">&#8377;29.72 Cr</div>
+    <div class="metric-delta" style="color:#8b949e;font-size:11px;font-weight:500;">Total Margin: <strong style="color:#22c55e;">&#8377;7.54 Cr</strong> &nbsp;&#183;&nbsp; 3,352 HC</div>
+  </div>
+  <div class="metric" style="border-color:#e6394644;background:linear-gradient(135deg,#1f1315,#201617);border-top:2px solid #e63946;">
+    <div class="metric-lbl" style="color:#e63946;">Pipeline</div>
+    <div class="metric-val" style="color:#f0f6fc;font-size:26px;">16 <span style="font-size:14px;font-weight:500;color:#8b949e;">Yet to Join</span></div>
+    <div class="metric-delta" style="color:#8b949e;font-size:11px;font-weight:500;">PO Value: <strong style="color:#e63946;">&#8377;40.5 L</strong></div>
   </div>
 </div>
 
@@ -587,12 +587,13 @@ with st.sidebar:
   <div class='s-row'><span class='s-lbl'>MTD</span><span class='s-val g'>+23 &#9650;</span></div>
   <div class='s-row'><span class='s-lbl'>Total PODs</span><span class='s-val b'>18</span></div>
   <div class='s-sec' style='margin-top:16px;'>PO & MARGIN</div>
-  <div class='s-row'><span class='s-lbl'>Total PO (3,352 HC)</span><span class='s-val' style='color:#f97316;'>₹29.72 Cr</span></div>
-  <div class='s-row'><span class='s-lbl'>Total Margin (~30%)</span><span class='s-val' style='color:#22c55e;'>₹7.54 Cr</span></div>
-  <div class='s-row'><span class='s-lbl'>Today's PO (5)</span><span class='s-val' style='color:#f97316;'>₹4.43 L</span></div>
-  <div class='s-row'><span class='s-lbl'>Today's Margin</span><span class='s-val' style='color:#22c55e;'>₹1.33 L</span></div>
-  <div class='s-row'><span class='s-lbl'>MTD PO (23)</span><span class='s-val' style='color:#a855f7;'>₹20.38 L</span></div>
-  <div class='s-row'><span class='s-lbl'>MTD Margin</span><span class='s-val' style='color:#06b6d4;'>₹6.11 L</span></div>
+  <div class='s-row'><span class='s-lbl'>Total PO (3,352 HC)</span><span class='s-val' style='color:#f59e0b;'>₹29.72 Cr</span></div>
+  <div class='s-row'><span class='s-lbl'>Total Margin</span><span class='s-val' style='color:#22c55e;'>₹7.54 Cr</span></div>
+  <div class='s-row'><span class='s-lbl'>Today OB PO (5)</span><span class='s-val' style='color:#f97316;'>₹12.5 L</span></div>
+  <div class='s-row'><span class='s-lbl'>Today Margin</span><span class='s-val' style='color:#22c55e;'>₹4.2 L</span></div>
+  <div class='s-row'><span class='s-lbl'>MTD OB PO (23)</span><span class='s-val' style='color:#a855f7;'>₹80 L</span></div>
+  <div class='s-row'><span class='s-lbl'>MTD Margin</span><span class='s-val' style='color:#22c55e;'>₹27 L</span></div>
+  <div class='s-row'><span class='s-lbl'>Pipeline (16)</span><span class='s-val' style='color:#e63946;'>₹40.5 L</span></div>
   <div class='s-sec' style='margin-top:16px;'>HEADCOUNT</div>
   <div class='s-mini wh'><div class='lbl'>Total Workforce</div><div class='val'>3,168</div></div>
   <div class='s-mini green'><div class='lbl'>Today&#8217;s Joiners</div><div class='val'>+5 &#9650;</div></div>
