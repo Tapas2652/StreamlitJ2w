@@ -71,11 +71,11 @@ def build_dashboard_html():
         joiner_rows += f"""
         <tr>
           <td>{j["num"]}</td>
-          <td><strong style="color:#1e293b;">{j["name"]}</strong></td>
+          <td><strong style="color:#f0f6fc;">{j["name"]}</strong></td>
           <td><span class="client-tag">{j["client"]}</span></td>
           <td>{j["pod"]}</td>
           <td>{j["role"]}</td>
-          <td style="color:#64748b;">{j["doj"]}</td>
+          <td style="color:#8b949e;">{j["doj"]}</td>
           <td><span class="badge-joined">&#10003; Joined</span></td>
         </tr>"""
 
@@ -100,22 +100,22 @@ def build_dashboard_html():
         bar_w = loc["pct"] / max(l["pct"] for l in LOCATIONS) * 100
         loc_rows += f"""
         <tr>
-          <td style="padding:10px 10px;border-bottom:1px solid #f1f5f9;color:#374151;vertical-align:middle;">
+          <td style="padding:10px 10px;border-bottom:1px solid #21262d44;color:#c9d1d9;vertical-align:middle;">
             <span style="display:inline-flex;align-items:center;gap:8px;">
               <span style="width:10px;height:10px;border-radius:50%;background:{loc['color']};flex-shrink:0;display:inline-block;"></span>
               <strong style="color:#f0f6fc;">{loc['city']}</strong>
             </span>
           </td>
-          <td style="padding:10px 10px;border-bottom:1px solid #f1f5f9;vertical-align:middle;">
+          <td style="padding:10px 10px;border-bottom:1px solid #21262d44;vertical-align:middle;">
             <div style="display:flex;align-items:center;gap:10px;">
-              <div style="flex:1;height:16px;background:#e2e8f0;border-radius:4px;overflow:hidden;">
+              <div style="flex:1;height:16px;background:#21262d;border-radius:4px;overflow:hidden;">
                 <div style="width:{bar_w:.1f}%;height:100%;background:{loc['color']};border-radius:4px;animation:bar-grow .9s ease-out forwards;animation-delay:{i*0.08:.2f}s;"></div>
               </div>
             </div>
           </td>
-          <td style="padding:10px 10px;border-bottom:1px solid #f1f5f9;color:#1e293b;font-weight:700;font-size:14px;text-align:right;vertical-align:middle;">{loc['count']:,}</td>
+          <td style="padding:10px 10px;border-bottom:1px solid #21262d44;color:#f0f6fc;font-weight:700;font-size:14px;text-align:right;vertical-align:middle;">{loc['count']:,}</td>
           <td style="padding:10px 10px;border-bottom:1px solid #21262d44;text-align:right;vertical-align:middle;">
-            <span style="background:#f1f5f9;color:{loc['color']};border:1px solid {loc['color']}44;border-radius:5px;padding:3px 7px;font-size:11px;font-weight:700;white-space:nowrap;">{loc['pct']}%</span>
+            <span style="background:#21262d;color:{loc['color']};border:1px solid {loc['color']}44;border-radius:5px;padding:3px 7px;font-size:11px;font-weight:700;white-space:nowrap;">{loc['pct']}%</span>
           </td>
         </tr>"""
 
@@ -125,22 +125,22 @@ def build_dashboard_html():
         bar_w = exp["pct"] / max(e["pct"] for e in EXPERIENCE) * 100
         exp_rows += f"""
         <tr>
-          <td style="padding:10px 10px;border-bottom:1px solid #f1f5f9;color:#374151;vertical-align:middle;">
+          <td style="padding:10px 10px;border-bottom:1px solid #21262d44;color:#c9d1d9;vertical-align:middle;">
             <span style="display:inline-flex;align-items:center;gap:8px;">
               <span style="width:10px;height:10px;border-radius:3px;background:{exp['color']};flex-shrink:0;display:inline-block;"></span>
               <strong style="color:#f0f6fc;">{exp['band']}</strong>
             </span>
           </td>
-          <td style="padding:10px 10px;border-bottom:1px solid #f1f5f9;vertical-align:middle;">
+          <td style="padding:10px 10px;border-bottom:1px solid #21262d44;vertical-align:middle;">
             <div style="display:flex;align-items:center;gap:10px;">
-              <div style="flex:1;height:16px;background:#e2e8f0;border-radius:4px;overflow:hidden;">
+              <div style="flex:1;height:16px;background:#21262d;border-radius:4px;overflow:hidden;">
                 <div style="width:{bar_w:.1f}%;height:100%;background:{exp['color']};border-radius:4px;animation:bar-grow .9s ease-out forwards;animation-delay:{i*0.08:.2f}s;"></div>
               </div>
             </div>
           </td>
-          <td style="padding:10px 10px;border-bottom:1px solid #f1f5f9;color:#1e293b;font-weight:700;font-size:14px;text-align:right;vertical-align:middle;">{exp['count']:,}</td>
+          <td style="padding:10px 10px;border-bottom:1px solid #21262d44;color:#f0f6fc;font-weight:700;font-size:14px;text-align:right;vertical-align:middle;">{exp['count']:,}</td>
           <td style="padding:10px 10px;border-bottom:1px solid #21262d44;text-align:right;vertical-align:middle;">
-            <span style="background:#f1f5f9;color:{exp['color']};border:1px solid {exp['color']}44;border-radius:5px;padding:3px 7px;font-size:11px;font-weight:700;white-space:nowrap;">{exp['pct']}%</span>
+            <span style="background:#21262d;color:{exp['color']};border:1px solid {exp['color']}44;border-radius:5px;padding:3px 7px;font-size:11px;font-weight:700;white-space:nowrap;">{exp['pct']}%</span>
           </td>
         </tr>"""
 
@@ -150,7 +150,7 @@ def build_dashboard_html():
 <meta charset="UTF-8"/>
 <style>
 *{{margin:0;padding:0;box-sizing:border-box;}}
-body{{font-family:'Inter','Segoe UI',sans-serif;background:#f1f5f9;color:#1e293b;padding:0 2px 0;overflow-x:hidden;}}
+body{{font-family:'Inter','Segoe UI',sans-serif;background:#0e1117;color:#fafafa;padding:0 2px 0;overflow-x:hidden;}}
 
 /* ── ANIMATIONS ── */
 @keyframes pulse-live{{0%,100%{{box-shadow:0 0 0 0 rgba(63,185,80,.7);}}50%{{box-shadow:0 0 0 7px rgba(63,185,80,0);}}}}
@@ -165,114 +165,114 @@ body{{font-family:'Inter','Segoe UI',sans-serif;background:#f1f5f9;color:#1e293b
 @keyframes fadeIn{{from{{opacity:0;transform:translateY(8px);}}to{{opacity:1;transform:none;}}}}
 
 /* ── TOPBAR ── */
-.topbar{{display:flex;align-items:center;justify-content:space-between;padding:14px 0 12px;border-bottom:2px solid #e2e8f0;margin-bottom:22px;}}
-.topbar-title{{font-size:16px;font-weight:700;color:#1e293b;}}
-.topbar-title span{{color:#2563eb;}}
+.topbar{{display:flex;align-items:center;justify-content:space-between;padding:14px 0 12px;border-bottom:1px solid #21262d;margin-bottom:22px;}}
+.topbar-title{{font-size:16px;font-weight:700;color:#f0f6fc;}}
+.topbar-title span{{color:#58a6ff;}}
 .topbar-right{{display:flex;align-items:center;gap:10px;}}
-.date-chip{{background:#f1f5f9;border:1px solid #cbd5e1;color:#475569;border-radius:6px;padding:5px 14px;font-size:12px;font-weight:500;}}
-.live-chip{{background:#f0fdf4;border:1px solid #bbf7d0;color:#16a34a;border-radius:6px;padding:5px 13px;font-size:12px;font-weight:600;display:inline-flex;align-items:center;gap:7px;}}
+.date-chip{{background:#21262d;border:1px solid #30363d;color:#8b949e;border-radius:6px;padding:5px 14px;font-size:12px;font-weight:500;}}
+.live-chip{{background:#1f2d1f;border:1px solid #2ea04326;color:#3fb950;border-radius:6px;padding:5px 13px;font-size:12px;font-weight:600;display:inline-flex;align-items:center;gap:7px;}}
 .live-dot{{width:9px;height:9px;background:#3fb950;border-radius:50%;flex-shrink:0;animation:pulse-live 1.5s ease-in-out infinite;}}
 
 /* ── CONGRATS ── */
-.congrats{{background:linear-gradient(90deg,#f0fdf4,#ecfdf5);border:1px solid #bbf7d0;border-left:4px solid #3fb950;border-radius:10px;padding:16px 20px;display:flex;align-items:center;gap:16px;margin-bottom:28px;animation:fadeIn .5s ease;}}
-.congrats h2{{font-size:14px;font-weight:700;color:#15803d;margin:0;}}
-.congrats p{{font-size:12px;color:#6b7280;margin:4px 0 0;}}
-.congrats strong{{color:#1e293b;}}
+.congrats{{background:linear-gradient(90deg,#1a2d1a,#16201e);border:1px solid #2ea04333;border-left:4px solid #3fb950;border-radius:10px;padding:16px 20px;display:flex;align-items:center;gap:16px;margin-bottom:28px;animation:fadeIn .5s ease;}}
+.congrats h2{{font-size:14px;font-weight:700;color:#3fb950;margin:0;}}
+.congrats p{{font-size:12px;color:#6e7681;margin:4px 0 0;}}
+.congrats strong{{color:#c9d1d9;}}
 
 /* ── METRICS ── */
 .metrics-row{{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px;}}
-.metric{{background:#fff;border:1px solid #e2e8f0;box-shadow:0 1px 4px rgba(0,0,0,.04);border-radius:10px;padding:18px 18px 14px;animation:fadeIn .5s ease;}}
-.metric.g{{border-color:#bbf7d0;background:#f0fdf4;animation:card-pulse 2.5s ease-in-out infinite;}}
-.metric.b{{border-color:#bfdbfe;background:#eff6ff;}}
-.metric-lbl{{font-size:11px;color:#64748b;font-weight:500;text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;}}
-.metric-val{{font-size:30px;font-weight:800;color:#1e293b;line-height:1;}}
-.metric.g .metric-val{{color:#16a34a;}}
-.metric.b .metric-val{{color:#2563eb;}}
-.metric-up{{color:#16a34a;display:inline-block;animation:bounce-up 1.2s ease-in-out infinite;font-size:20px;}}
-.metric-delta{{font-size:11px;color:#16a34a;font-weight:600;margin-top:6px;}}
-.metric-sub{{font-size:10px;color:#94a3b8;margin-top:3px;letter-spacing:.3px;}}
+.metric{{background:#161b22;border:1px solid #21262d;border-radius:10px;padding:18px 18px 14px;animation:fadeIn .5s ease;}}
+.metric.g{{border-color:#2ea04326;background:#1a2d1a;animation:card-pulse 2.5s ease-in-out infinite;}}
+.metric.b{{border-color:#1f6feb26;background:#1a1f2d;}}
+.metric-lbl{{font-size:11px;color:#8b949e;font-weight:500;text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;}}
+.metric-val{{font-size:30px;font-weight:800;color:#f0f6fc;line-height:1;}}
+.metric.g .metric-val{{color:#3fb950;animation:glow-text 2.5s ease-in-out infinite;}}
+.metric.b .metric-val{{color:#58a6ff;}}
+.metric-up{{color:#3fb950;display:inline-block;animation:bounce-up 1.2s ease-in-out infinite;font-size:20px;}}
+.metric-delta{{font-size:11px;color:#3fb950;font-weight:600;margin-top:6px;}}
+.metric-sub{{font-size:10px;color:#6e7681;margin-top:3px;letter-spacing:.3px;}}
 
 /* ── HC BAR ── */
-.hc-bar{{background:linear-gradient(90deg,#fff,#f8fafc);border:1px solid #e2e8f0;box-shadow:0 1px 4px rgba(0,0,0,.04);border-left:4px solid #e63946;border-radius:10px;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;}}
-.hc-label{{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;display:flex;align-items:center;gap:7px;}}
+.hc-bar{{background:linear-gradient(90deg,#161b22,#1a1f2d);border:1px solid #1f6feb26;border-left:4px solid #e63946;border-radius:10px;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;}}
+.hc-label{{font-size:11px;color:#8b949e;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;display:flex;align-items:center;gap:7px;}}
 .red-dot{{width:8px;height:8px;background:#e63946;border-radius:50%;animation:pulse-red 1.5s ease-in-out infinite;flex-shrink:0;}}
-.hc-num{{font-size:28px;font-weight:900;color:#1e293b;}}
-.hc-num .sub{{font-size:13px;font-weight:400;color:#94a3b8;}}
-.hc-today{{font-size:15px;font-weight:700;color:#2563eb;}}
-.hc-mtd{{font-size:17px;font-weight:800;color:#16a34a;margin-top:4px;}}
+.hc-num{{font-size:28px;font-weight:900;color:#f0f6fc;}}
+.hc-num .sub{{font-size:13px;font-weight:400;color:#6e7681;}}
+.hc-today{{font-size:15px;font-weight:700;color:#58a6ff;}}
+.hc-mtd{{font-size:17px;font-weight:800;color:#3fb950;animation:glow-text 2.5s ease-in-out infinite;margin-top:4px;}}
 
 /* ── WAVE DOTS ── */
 .wave-dots{{display:inline-flex;align-items:flex-end;gap:2px;margin-left:4px;vertical-align:middle;}}
 .wave-dots .dot{{display:inline-block;font-size:18px;font-weight:900;line-height:1;animation:wave-dot 1.4s ease-in-out infinite;}}
 .wave-dots .dot:nth-child(2){{animation-delay:.2s;}}
 .wave-dots .dot:nth-child(3){{animation-delay:.4s;}}
-.wave-dots:not(.pod-wave) .dot{{color:#2563eb;}}
-.pod-wave .dot{{color:#cbd5e1;font-size:15px;}}
+.wave-dots:not(.pod-wave) .dot{{color:#58a6ff;}}
+.pod-wave .dot{{color:#30363d;font-size:15px;}}
 
 /* ── SEC HEADER ── */
-.sec-hdr{{font-size:12px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:1.2px;border-bottom:2px solid #e2e8f0;padding-bottom:10px;margin-bottom:16px;margin-top:4px;}}
+.sec-hdr{{font-size:12px;font-weight:700;color:#8b949e;text-transform:uppercase;letter-spacing:1.2px;border-bottom:1px solid #21262d;padding-bottom:10px;margin-bottom:16px;margin-top:4px;}}
 
 /* ── JOINER TABLE ── */
-.table-wrap{{background:#fff;border:1px solid #e2e8f0;box-shadow:0 1px 4px rgba(0,0,0,.04);border-radius:10px;overflow:hidden;margin-bottom:28px;overflow-x:auto;}}
+.table-wrap{{background:#161b22;border:1px solid #21262d;border-radius:10px;overflow:hidden;margin-bottom:28px;overflow-x:auto;}}
 .jtable{{width:100%;border-collapse:collapse;font-size:13px;}}
-.jtable thead tr{{background:#f8fafc;}}
-.jtable th{{padding:11px 14px;text-align:left;font-size:11px;font-weight:600;color:#64748b;border-bottom:1px solid #e2e8f0;text-transform:uppercase;letter-spacing:.8px;white-space:nowrap;}}
-.jtable td{{padding:12px 14px;border-bottom:1px solid #f1f5f9;color:#374151;vertical-align:middle;}}
+.jtable thead tr{{background:#21262d;}}
+.jtable th{{padding:11px 14px;text-align:left;font-size:11px;font-weight:600;color:#8b949e;text-transform:uppercase;letter-spacing:.8px;white-space:nowrap;}}
+.jtable td{{padding:12px 14px;border-bottom:1px solid #21262d44;color:#c9d1d9;vertical-align:middle;}}
 .jtable tr:last-child td{{border-bottom:none;}}
-.jtable tr:hover td{{background:#f8fafc;}}
-.client-tag{{background:#eff6ff;color:#2563eb;border:1px solid #bfdbfe;border-radius:5px;padding:2px 8px;font-size:11px;font-weight:600;white-space:nowrap;}}
-.badge-joined{{background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0;border-radius:6px;padding:3px 9px;font-size:11px;font-weight:700;white-space:nowrap;animation:joined-glow 2s ease-in-out infinite;display:inline-block;}}
+.jtable tr:hover td{{background:#1c2128;}}
+.client-tag{{background:#1f3a5f;color:#58a6ff;border:1px solid #1f6feb44;border-radius:5px;padding:2px 8px;font-size:11px;font-weight:600;white-space:nowrap;}}
+.badge-joined{{background:#1a2d1a;color:#3fb950;border:1px solid #2ea04344;border-radius:6px;padding:3px 9px;font-size:11px;font-weight:700;white-space:nowrap;animation:joined-glow 2s ease-in-out infinite;display:inline-block;}}
 
 /* ── DIST TABLES ── */
 .dist-row{{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px;}}
-.dist-box{{background:#fff;border:1px solid #e2e8f0;box-shadow:0 1px 4px rgba(0,0,0,.04);border-radius:10px;overflow:hidden;}}
+.dist-box{{background:#161b22;border:1px solid #21262d;border-radius:10px;overflow:hidden;}}
 .dist-box table{{width:100%;table-layout:fixed;border-collapse:collapse;}}
-.dist-thead tr{{background:#f8fafc;}}
-.dist-thead th{{padding:10px 10px;text-align:left;font-size:10px;font-weight:600;color:#64748b;border-bottom:1px solid #e2e8f0;text-transform:uppercase;letter-spacing:.7px;white-space:nowrap;overflow:hidden;}}
+.dist-thead tr{{background:#21262d;}}
+.dist-thead th{{padding:10px 10px;text-align:left;font-size:10px;font-weight:600;color:#8b949e;text-transform:uppercase;letter-spacing:.7px;white-space:nowrap;overflow:hidden;}}
 .dist-thead th:nth-child(1){{width:28%;}}
 .dist-thead th:nth-child(2){{width:34%;}}
 .dist-thead th:nth-child(3){{width:18%;text-align:right;}}
 .dist-thead th:nth-child(4){{width:20%;text-align:right;}}
-.dist-tbody tr:hover td{{background:#f8fafc;}}
+.dist-tbody tr:hover td{{background:#1c2128;}}
 .dist-tbody tr:last-child td{{border-bottom:none!important;}}
-.dist-total{{display:flex;justify-content:space-between;align-items:center;padding:10px 10px;background:#f8fafc;border-top:1px solid #e2e8f0;font-size:12px;color:#64748b;}}
-.dist-total strong{{color:#1e293b;font-size:14px;}}
+.dist-total{{display:flex;justify-content:space-between;align-items:center;padding:10px 10px;background:#1c2128;border-top:1px solid #21262d;font-size:12px;color:#8b949e;}}
+.dist-total strong{{color:#f0f6fc;font-size:14px;}}
 
 /* ── POD GRID ── */
 .pod-grid{{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:28px;}}
-.pod-card{{background:#fff;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;transition:border-color .2s,transform .15s,box-shadow .2s;box-shadow:0 1px 4px rgba(0,0,0,.04);animation:fadeIn .4s ease;}}
-.pod-card:hover{{border-color:#cbd5e1;transform:translateY(-2px);box-shadow:0 4px 14px rgba(0,0,0,.08);}}
-.pod-hdr{{padding:10px 13px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid #f1f5f9;}}
+.pod-card{{background:#161b22;border:1px solid #21262d;border-radius:10px;overflow:hidden;transition:border-color .2s,transform .15s;animation:fadeIn .4s ease;}}
+.pod-card:hover{{border-color:#30363d;transform:translateY(-2px);}}
+.pod-hdr{{padding:10px 13px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid #21262d44;}}
 .pod-body{{padding:12px 14px 14px;}}
-.pod-count{{font-size:22px;font-weight:800;color:#1e293b;display:flex;align-items:center;gap:8px;}}
-.pod-up{{color:#16a34a;font-size:14px;animation:bounce-up 1.2s ease-in-out infinite;}}
-.pod-new{{font-size:10px;background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0;border-radius:5px;padding:2px 7px;font-weight:700;animation:blink-badge 1.8s ease-in-out infinite;}}
-.pod-skills{{font-size:11px;color:#94a3b8;margin-top:6px;line-height:1.65;}}
+.pod-count{{font-size:22px;font-weight:800;color:#f0f6fc;display:flex;align-items:center;gap:8px;}}
+.pod-up{{color:#3fb950;font-size:14px;animation:bounce-up 1.2s ease-in-out infinite;}}
+.pod-new{{font-size:10px;background:#1a2d1a;color:#3fb950;border:1px solid #2ea04333;border-radius:5px;padding:2px 7px;font-weight:700;animation:blink-badge 1.8s ease-in-out infinite;}}
+.pod-skills{{font-size:11px;color:#6e7681;margin-top:6px;line-height:1.65;}}
 
 /* pod colours */
-.p-java{{border-top:2px solid #f97316;}}.p-java .pod-hdr{{color:#ea580c;background:#fff7ed;}}
-.p-frontend{{border-top:2px solid #a855f7;}}.p-frontend .pod-hdr{{color:#9333ea;background:#faf5ff;}}
-.p-python{{border-top:2px solid #8b5cf6;}}.p-python .pod-hdr{{color:#7c3aed;background:#f5f3ff;}}
-.p-analytics{{border-top:2px solid #3b82f6;}}.p-analytics .pod-hdr{{color:#2563eb;background:#eff6ff;}}
-.p-dataeng{{border-top:2px solid #06b6d4;}}.p-dataeng .pod-hdr{{color:#0891b2;background:#ecfeff;}}
-.p-security{{border-top:2px solid #f59e0b;}}.p-security .pod-hdr{{color:#d97706;background:#fffbeb;}}
-.p-automation{{border-top:2px solid #22c55e;}}.p-automation .pod-hdr{{color:#16a34a;background:#f0fdf4;}}
-.p-devops{{border-top:2px solid #10b981;}}.p-devops .pod-hdr{{color:#059669;background:#ecfdf5;}}
-.p-biz{{border-top:2px solid #fb923c;}}.p-biz .pod-hdr{{color:#ea580c;background:#fff7ed;}}
-.p-salesforce{{border-top:2px solid #6366f1;}}.p-salesforce .pod-hdr{{color:#4f46e5;background:#eef2ff;}}
-.p-sap{{border-top:2px solid #14b8a6;}}.p-sap .pod-hdr{{color:#0d9488;background:#f0fdfa;}}
-.p-database{{border-top:2px solid #64748b;}}.p-database .pod-hdr{{color:#475569;background:#f8fafc;}}
-.p-infra{{border-top:2px solid #ef4444;}}.p-infra .pod-hdr{{color:#dc2626;background:#fef2f2;}}
-.p-appsupport{{border-top:2px solid #a78bfa;}}.p-appsupport .pod-hdr{{color:#7c3aed;background:#f5f3ff;}}
-.p-embedded{{border-top:2px solid #eab308;}}.p-embedded .pod-hdr{{color:#ca8a04;background:#fefce8;}}
-.p-product{{border-top:2px solid #22d3ee;}}.p-product .pod-hdr{{color:#0891b2;background:#ecfeff;}}
-.p-ites{{border-top:2px solid #f59e0b;}}.p-ites .pod-hdr{{color:#d97706;background:#fffbeb;}}
-.p-svc{{border-top:2px solid #34d399;}}.p-svc .pod-hdr{{color:#059669;background:#ecfdf5;}}
+.p-java{{border-top:2px solid #f97316;}}.p-java .pod-hdr{{color:#f97316;background:#1f1a16;}}
+.p-frontend{{border-top:2px solid #a855f7;}}.p-frontend .pod-hdr{{color:#a855f7;background:#1d1a22;}}
+.p-python{{border-top:2px solid #8b5cf6;}}.p-python .pod-hdr{{color:#8b5cf6;background:#1c1a22;}}
+.p-analytics{{border-top:2px solid #3b82f6;}}.p-analytics .pod-hdr{{color:#3b82f6;background:#16192a;}}
+.p-dataeng{{border-top:2px solid #06b6d4;}}.p-dataeng .pod-hdr{{color:#06b6d4;background:#161e22;}}
+.p-security{{border-top:2px solid #f59e0b;}}.p-security .pod-hdr{{color:#f59e0b;background:#1f1c14;}}
+.p-automation{{border-top:2px solid #22c55e;}}.p-automation .pod-hdr{{color:#22c55e;background:#161e18;}}
+.p-devops{{border-top:2px solid #10b981;}}.p-devops .pod-hdr{{color:#10b981;background:#16201e;}}
+.p-biz{{border-top:2px solid #fb923c;}}.p-biz .pod-hdr{{color:#fb923c;background:#1f1c18;}}
+.p-salesforce{{border-top:2px solid #6366f1;}}.p-salesforce .pod-hdr{{color:#6366f1;background:#18192a;}}
+.p-sap{{border-top:2px solid #14b8a6;}}.p-sap .pod-hdr{{color:#14b8a6;background:#16201e;}}
+.p-database{{border-top:2px solid #64748b;}}.p-database .pod-hdr{{color:#94a3b8;background:#1a1c20;}}
+.p-infra{{border-top:2px solid #ef4444;}}.p-infra .pod-hdr{{color:#ef4444;background:#1f1616;}}
+.p-appsupport{{border-top:2px solid #a78bfa;}}.p-appsupport .pod-hdr{{color:#a78bfa;background:#1c1a22;}}
+.p-embedded{{border-top:2px solid #eab308;}}.p-embedded .pod-hdr{{color:#eab308;background:#1e1c14;}}
+.p-product{{border-top:2px solid #22d3ee;}}.p-product .pod-hdr{{color:#22d3ee;background:#161f22;}}
+.p-ites{{border-top:2px solid #f59e0b;}}.p-ites .pod-hdr{{color:#f59e0b;background:#1f1c14;}}
+.p-svc{{border-top:2px solid #34d399;}}.p-svc .pod-hdr{{color:#34d399;background:#16201e;}}
 
 /* footer */
-.fnote{{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px 16px;font-size:12px;color:#64748b;margin-bottom:16px;}}
-.fnote strong{{color:#475569;}}.fnote b{{color:#1e293b;}}
-.dash-footer{{font-size:11px;color:#94a3b8;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:12px 0 2px;border-top:2px solid #e2e8f0;}}
+.fnote{{background:#161b22;border:1px solid #21262d;border-radius:8px;padding:12px 16px;font-size:12px;color:#6e7681;margin-bottom:16px;}}
+.fnote strong{{color:#8b949e;}}.fnote b{{color:#c9d1d9;}}
+.dash-footer{{font-size:11px;color:#6e7681;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:12px 0 2px;border-top:1px solid #21262d;}}
 .tagline{{color:#e63946;font-weight:600;}}
 </style>
 </head>
@@ -306,12 +306,12 @@ body{{font-family:'Inter','Segoe UI',sans-serif;background:#f1f5f9;color:#1e293b
   <div class="metric b">
     <div class="metric-lbl">Total Headcount</div>
     <div class="metric-val">3,168</div>
-    <div class="metric-delta" style="color:#2563eb;">All active PODs</div>
+    <div class="metric-delta" style="color:#58a6ff;">All active PODs</div>
   </div>
   <div class="metric">
     <div class="metric-lbl">Active PODs</div>
     <div class="metric-val">18</div>
-    <div class="metric-delta" style="color:#64748b;">Competency groups</div>
+    <div class="metric-delta" style="color:#8b949e;">Competency groups</div>
   </div>
   <div class="metric g">
     <div class="metric-lbl">MTD Onboardings</div>
@@ -325,22 +325,22 @@ body{{font-family:'Inter','Segoe UI',sans-serif;background:#f1f5f9;color:#1e293b
   <div class="metric" style="border-color:#f9731644;background:linear-gradient(135deg,#1f1a13,#201d14);border-top:2px solid #f97316;">
     <div class="metric-lbl" style="color:#f97316;">Today's OB PO Value</div>
     <div class="metric-val" style="color:#f0f6fc;font-size:26px;">&#8377;12.5 L</div>
-    <div class="metric-delta" style="color:#64748b;font-size:11px;font-weight:500;">Margin: <strong style="color:#22c55e;">&#8377;4.2 L</strong> &nbsp;&#183;&nbsp; Based on 5 joiners</div>
+    <div class="metric-delta" style="color:#8b949e;font-size:11px;font-weight:500;">Margin: <strong style="color:#22c55e;">&#8377;4.2 L</strong> &nbsp;&#183;&nbsp; Based on 5 joiners</div>
   </div>
   <div class="metric" style="border-color:#a855f744;background:linear-gradient(135deg,#1a1620,#1d1924);border-top:2px solid #a855f7;">
     <div class="metric-lbl" style="color:#a855f7;">MTD OB PO Value</div>
     <div class="metric-val" style="color:#f0f6fc;font-size:26px;">&#8377;80 L</div>
-    <div class="metric-delta" style="color:#64748b;font-size:11px;font-weight:500;">MTD Margin: <strong style="color:#22c55e;">&#8377;27 L</strong> &nbsp;&#183;&nbsp; 23 joiners</div>
+    <div class="metric-delta" style="color:#8b949e;font-size:11px;font-weight:500;">MTD Margin: <strong style="color:#22c55e;">&#8377;27 L</strong> &nbsp;&#183;&nbsp; 23 joiners</div>
   </div>
   <div class="metric" style="border-color:#f59e0b44;background:linear-gradient(135deg,#1f1c13,#201e15);border-top:2px solid #f59e0b;">
     <div class="metric-lbl" style="color:#f59e0b;">Total PO Value</div>
     <div class="metric-val" style="color:#f0f6fc;font-size:26px;">&#8377;29.72 Cr</div>
-    <div class="metric-delta" style="color:#64748b;font-size:11px;font-weight:500;">Total Margin: <strong style="color:#22c55e;">&#8377;7.54 Cr</strong> &nbsp;&#183;&nbsp; 3,352 HC</div>
+    <div class="metric-delta" style="color:#8b949e;font-size:11px;font-weight:500;">Total Margin: <strong style="color:#22c55e;">&#8377;7.54 Cr</strong> &nbsp;&#183;&nbsp; 3,352 HC</div>
   </div>
   <div class="metric" style="border-color:#e6394644;background:linear-gradient(135deg,#1f1315,#201617);border-top:2px solid #e63946;">
     <div class="metric-lbl" style="color:#e63946;">Pipeline</div>
-    <div class="metric-val" style="color:#f0f6fc;font-size:26px;">16 <span style="font-size:14px;font-weight:500;color:#64748b;">Yet to Join</span></div>
-    <div class="metric-delta" style="color:#64748b;font-size:11px;font-weight:500;">PO Value: <strong style="color:#e63946;">&#8377;40.5 L</strong></div>
+    <div class="metric-val" style="color:#f0f6fc;font-size:26px;">16 <span style="font-size:14px;font-weight:500;color:#8b949e;">Yet to Join</span></div>
+    <div class="metric-delta" style="color:#8b949e;font-size:11px;font-weight:500;">PO Value: <strong style="color:#e63946;">&#8377;40.5 L</strong></div>
   </div>
 </div>
 
@@ -378,7 +378,7 @@ body{{font-family:'Inter','Segoe UI',sans-serif;background:#f1f5f9;color:#1e293b
   <div class="dist-box">
     <div style="padding:14px 16px 10px;border-bottom:1px solid #21262d44;display:flex;align-items:center;gap:8px;">
       <span style="font-size:16px;">&#128205;</span>
-      <span style="font-size:12px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:1px;">Top Locations</span>
+      <span style="font-size:12px;font-weight:700;color:#8b949e;text-transform:uppercase;letter-spacing:1px;">Top Locations</span>
     </div>
     <table style="width:100%;border-collapse:collapse;">
       <thead class="dist-thead">
@@ -403,7 +403,7 @@ body{{font-family:'Inter','Segoe UI',sans-serif;background:#f1f5f9;color:#1e293b
   <div class="dist-box">
     <div style="padding:14px 16px 10px;border-bottom:1px solid #21262d44;display:flex;align-items:center;gap:8px;">
       <span style="font-size:16px;">&#9203;</span>
-      <span style="font-size:12px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:1px;">Experience Bands</span>
+      <span style="font-size:12px;font-weight:700;color:#8b949e;text-transform:uppercase;letter-spacing:1px;">Experience Bands</span>
     </div>
     <table style="width:100%;border-collapse:collapse;">
       <thead class="dist-thead">
@@ -439,7 +439,7 @@ body{{font-family:'Inter','Segoe UI',sans-serif;background:#f1f5f9;color:#1e293b
 
 <!-- FOOTER -->
 <div class="dash-footer">
-  <div><strong style="color:#374151;">Joulestowatts Business Solutions Pvt. Ltd.</strong> &nbsp;&#183;&nbsp; <span class="tagline">Founder's Office</span></div>
+  <div><strong style="color:#c9d1d9;">Joulestowatts Business Solutions Pvt. Ltd.</strong> &nbsp;&#183;&nbsp; <span class="tagline">Founder's Office</span></div>
   <div><span class="tagline">Time Matters</span> &nbsp;&#124;&nbsp; &#128231; talent@joulestowatts.com &nbsp;&#124;&nbsp; <span>Auto-generated &#183; Do not reply</span></div>
 </div>
 
@@ -461,8 +461,8 @@ body{{font-family:'Inter','Segoe UI',sans-serif;background:#f1f5f9;color:#1e293b
 
 GLOBAL_CSS = """
 <style>
-html,body,[data-testid="stAppViewContainer"],[data-testid="stMain"]{background:#f1f5f9!important;color:#1e293b;font-family:'Inter','Segoe UI',sans-serif;}
-[data-testid="stSidebar"]{background:#1e293b!important;border-right:1px solid #334155;transition:all 0.3s ease;}
+html,body,[data-testid="stAppViewContainer"],[data-testid="stMain"]{background:#0e1117!important;color:#fafafa;font-family:'Inter','Segoe UI',sans-serif;}
+[data-testid="stSidebar"]{background:#161b22!important;border-right:1px solid #21262d;transition:all 0.3s ease;}
 [data-testid="stSidebar"] *{color:#c9d1d9!important;}
 #MainMenu, footer { visibility: hidden; }
 [data-testid="stDecoration"] { display: none; }
@@ -537,7 +537,7 @@ iframe{border:none!important;}
 .s-row:last-child{border-bottom:none;}
 .s-lbl{color:#6e7681!important;}.s-val{font-weight:600;}
 .s-val.g{color:#3fb950!important;}.s-val.b{color:#58a6ff!important;}
-.s-mini{background:#f1f5f9;border-radius:8px;padding:10px 12px;margin-bottom:8px;}
+.s-mini{background:#21262d;border-radius:8px;padding:10px 12px;margin-bottom:8px;}
 .s-mini .lbl{font-size:10px;color:#6e7681!important;text-transform:uppercase;letter-spacing:.8px;}
 .s-mini .val{font-size:18px;font-weight:800;margin-top:2px;}
 .s-mini.green .val{color:#3fb950!important;}.s-mini.blue .val{color:#58a6ff!important;}.s-mini.wh .val{color:#f0f6fc!important;}
@@ -598,7 +598,7 @@ st.markdown("""
 
 with st.sidebar:
     st.markdown(
-        f'<div style="text-align:center;padding:10px 0 18px;border-bottom:2px solid #e2e8f0;position:relative;">'
+        f'<div style="text-align:center;padding:10px 0 18px;border-bottom:1px solid #21262d;position:relative;">'
         f'<img src="data:image/png;base64,{LOGO_B64}" style="height:88px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(230,57,70,0.35));"/>'
         f'<div style="color:#e63946;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-top:8px;">TIME MATTERS</div>'
         f'</div>',
@@ -607,18 +607,18 @@ with st.sidebar:
     st.markdown("""
 <div style='margin-top:14px;'>
   <div class='s-sec'>REPORT BY</div>
-  <div style='background:linear-gradient(135deg,#f1f5f9,#e2e8f0);border:1px solid #cbd5e1;border-radius:12px;padding:14px;margin-bottom:12px;'>
+  <div style='background:linear-gradient(135deg,#1a1f2d,#21262d);border:1px solid #30363d;border-radius:12px;padding:14px;margin-bottom:12px;'>
     <!-- Badge on top -->
-    <span style='display:inline-block;margin-bottom:12px;background:linear-gradient(90deg,#1f3a5f,#16294d);color:#2563eb;border:1px solid #1f6feb55;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;letter-spacing:0.3px;'>
+    <span style='display:inline-block;margin-bottom:12px;background:linear-gradient(90deg,#1f3a5f,#16294d);color:#58a6ff;border:1px solid #1f6feb55;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;letter-spacing:0.3px;'>
       &#128203; Competency Onboarding Dashboard
     </span>
     <!-- Better avatar: circular gradient with initials -->
-    <div style='width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#e63946,#2ec4b6);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#fff;margin-bottom:10px;box-shadow:0 0 0 3px #e2e8f0,0 0 0 5px #2ea04355;'>
+    <div style='width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#e63946,#2ec4b6);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#fff;margin-bottom:10px;box-shadow:0 0 0 3px #21262d,0 0 0 5px #2ea04355;'>
       TI
     </div>
     <!-- Name below avatar -->
     <div style='font-size:14px;font-weight:700;color:#f0f6fc;'>Talent Intelligence</div>
-    <div style='font-size:11px;color:#64748b;margin-top:3px;'>Founder&#8217;s Office &nbsp;&#183;&nbsp; HR Analytics</div>
+    <div style='font-size:11px;color:#8b949e;margin-top:3px;'>Founder&#8217;s Office &nbsp;&#183;&nbsp; HR Analytics</div>
   </div>
   <div class='s-sec'>REPORT INFO</div>
   <div class='s-row'><span class='s-lbl'>Date</span><span class='s-val'>02 Mar 2026</span></div>
@@ -639,8 +639,11 @@ with st.sidebar:
   <div class='s-mini wh'><div class='lbl'>Total Workforce</div><div class='val'>3,168</div></div>
   <div class='s-mini green'><div class='lbl'>Today&#8217;s Joiners</div><div class='val'>+5 &#9650;</div></div>
   <div class='s-mini blue'><div class='lbl'>MTD Onboardings</div><div class='val'>+23</div></div>
-  <hr style='border-color:#e2e8f0;margin:14px 0;'/>
-  <div style='font-size:11px;color:#6b7280;'><span class='sb-live'></span> Live &middot; Auto-refreshed</div>
-  <div style='font-size:11px;color:#6b7280;margin-top:10px;'><strong style='color:#374151;display:block;'>Joulestowatts Business Solutions Pvt. Ltd.</strong>Founder&#8217;s Office</div>
+  <hr style='border-color:#21262d;margin:14px 0;'/>
+  <div style='font-size:11px;color:#6e7681;'><span class='sb-live'></span> Live &middot; Auto-refreshed</div>
+  <div style='font-size:11px;color:#6e7681;margin-top:10px;'><strong style='color:#c9d1d9;display:block;'>Joulestowatts Business Solutions Pvt. Ltd.</strong>Founder&#8217;s Office</div>
 </div>
 """, unsafe_allow_html=True)
+
+html_content = build_dashboard_html()
+components.html(html_content, height=5650, scrolling=False)
