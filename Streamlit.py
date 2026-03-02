@@ -464,9 +464,12 @@ GLOBAL_CSS = """
 html,body,[data-testid="stAppViewContainer"],[data-testid="stMain"]{background:#0e1117!important;color:#fafafa;font-family:'Inter','Segoe UI',sans-serif;}
 [data-testid="stSidebar"]{background:#161b22!important;border-right:1px solid #21262d;transition:all 0.3s ease;}
 [data-testid="stSidebar"] *{color:#c9d1d9!important;}
-#MainMenu,footer{visibility:hidden;}
-header{visibility:hidden;}
-[data-testid="stDecoration"]{display:none;}
+#MainMenu, footer { visibility: hidden; }
+[data-testid="stDecoration"] { display: none; }
+/* hide the header toolbar icons but NOT the sidebar toggle */
+[data-testid="stHeader"] { background: transparent !important; }
+[data-testid="stToolbar"] { visibility: hidden; }
+[data-testid="stStatusWidget"] { visibility: hidden; }
 iframe{border:none!important;}
 
 /* ── collapsedControl must NEVER be hidden ── */
@@ -514,14 +517,18 @@ iframe{border:none!important;}
 /* position the re-open button when sidebar is collapsed */
 [data-testid="collapsedControl"] {
     position: fixed !important;
-    top: 50% !important;
-    left: 0px !important;
+    top: 48% !important;
+    left: 4px !important;
     transform: translateY(-50%) !important;
-    z-index: 99999 !important;
+    z-index: 999999 !important;
     opacity: 1 !important;
     visibility: visible !important;
     display: flex !important;
     pointer-events: auto !important;
+    background: #1f6feb !important;
+    border-radius: 0 8px 8px 0 !important;
+    padding: 8px 4px !important;
+    box-shadow: 4px 0 16px rgba(31,111,235,0.5) !important;
 }
 
 /* sidebar inner content spacing */
@@ -546,29 +553,45 @@ st.markdown("""
 <script>
 (function() {
     function fixCollapsedBtn() {
-        var selectors = [
-            '[data-testid="collapsedControl"]',
-            '[data-testid="collapsedControl"] button',
-            '[data-testid="stSidebarCollapseButton"] button'
-        ];
-        selectors.forEach(function(sel) {
-            var els = document.querySelectorAll(sel);
-            els.forEach(function(el) {
-                el.style.setProperty('opacity',       '1',      'important');
-                el.style.setProperty('visibility',    'visible','important');
-                el.style.setProperty('display',       'flex',   'important');
-                el.style.setProperty('pointer-events','auto',   'important');
-                el.style.setProperty('z-index',       '99999',  'important');
-            });
-        });
+        // Fix the collapsed control container
+        var collapsed = document.querySelector('[data-testid="collapsedControl"]');
+        if (collapsed) {
+            collapsed.style.setProperty('opacity',       '1',      'important');
+            collapsed.style.setProperty('visibility',    'visible','important');
+            collapsed.style.setProperty('display',       'flex',   'important');
+            collapsed.style.setProperty('pointer-events','auto',   'important');
+            collapsed.style.setProperty('z-index',       '999999', 'important');
+            collapsed.style.setProperty('position',      'fixed',  'important');
+            collapsed.style.setProperty('top',           '48%',    'important');
+            collapsed.style.setProperty('left',          '4px',    'important');
+            // Fix its button child
+            var btn = collapsed.querySelector('button');
+            if (btn) {
+                btn.style.setProperty('opacity',       '1',    'important');
+                btn.style.setProperty('visibility',    'visible','important');
+                btn.style.setProperty('display',       'flex',  'important');
+                btn.style.setProperty('pointer-events','auto',  'important');
+                btn.style.setProperty('cursor',        'pointer','important');
+            }
+        }
+        // Also fix the header itself - make sure it's not hidden
+        var header = document.querySelector('header');
+        if (header) {
+            header.style.setProperty('visibility', 'visible', 'important');
+        }
     }
 
     // Run immediately, then on interval, then watch DOM changes
     fixCollapsedBtn();
-    setInterval(fixCollapsedBtn, 500);
+    setInterval(fixCollapsedBtn, 300);
 
     var observer = new MutationObserver(fixCollapsedBtn);
-    observer.observe(document.body, { childList: true, subtree: true, attributes: true });
+    document.addEventListener('DOMContentLoaded', function() {
+        observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['style', 'class'] });
+        fixCollapsedBtn();
+    });
+    // Also run on window load
+    window.addEventListener('load', fixCollapsedBtn);
 })();
 </script>
 """, unsafe_allow_html=True)
