@@ -190,6 +190,7 @@ body{{font-family:'Inter','Segoe UI',sans-serif;background:#0e1117;color:#fafafa
 .metric.b .metric-val{{color:#58a6ff;}}
 .metric-up{{color:#3fb950;display:inline-block;animation:bounce-up 1.2s ease-in-out infinite;font-size:20px;}}
 .metric-delta{{font-size:11px;color:#3fb950;font-weight:600;margin-top:6px;}}
+.metric-sub{{font-size:10px;color:#6e7681;margin-top:3px;letter-spacing:.3px;}}
 
 /* ── HC BAR ── */
 .hc-bar{{background:linear-gradient(90deg,#161b22,#1a1f2d);border:1px solid #1f6feb26;border-left:4px solid #e63946;border-radius:10px;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;}}
@@ -316,6 +317,30 @@ body{{font-family:'Inter','Segoe UI',sans-serif;background:#0e1117;color:#fafafa
     <div class="metric-lbl">MTD Onboardings</div>
     <div class="metric-val">+23 <span class="metric-up">&#9650;</span></div>
     <div class="metric-delta">&#9650; This month</div>
+  </div>
+</div>
+
+<!-- FINANCIAL METRICS -->
+<div class="metrics-row" style="margin-top:-8px;">
+  <div class="metric" style="border-color:#f97316 44;background:linear-gradient(135deg,#1f1a13,#201d14);border-top:2px solid #f97316;">
+    <div class="metric-lbl" style="color:#f97316;">Today's PO Value</div>
+    <div class="metric-val" style="color:#f0f6fc;font-size:26px;">&#8377;4.43 L</div>
+    <div class="metric-delta" style="color:#f97316;font-size:11px;">&#9650; Based on 5 joiners today</div>
+  </div>
+  <div class="metric" style="border-color:#22c55e44;background:linear-gradient(135deg,#161d16,#18221a);border-top:2px solid #22c55e;">
+    <div class="metric-lbl" style="color:#22c55e;">Today's Margin</div>
+    <div class="metric-val" style="color:#f0f6fc;font-size:26px;">&#8377;1.33 L</div>
+    <div class="metric-delta" style="color:#22c55e;font-size:11px;">&#8776; 30% on today's PO</div>
+  </div>
+  <div class="metric" style="border-color:#a855f744;background:linear-gradient(135deg,#1a1620,#1d1924);border-top:2px solid #a855f7;">
+    <div class="metric-lbl" style="color:#a855f7;">MTD PO Value</div>
+    <div class="metric-val" style="color:#f0f6fc;font-size:26px;">&#8377;20.38 L</div>
+    <div class="metric-delta" style="color:#a855f7;font-size:11px;">&#9650; Based on 23 MTD joiners</div>
+  </div>
+  <div class="metric" style="border-color:#06b6d444;background:linear-gradient(135deg,#131d1f,#14202200);border-top:2px solid #06b6d4;">
+    <div class="metric-lbl" style="color:#06b6d4;">MTD Margin</div>
+    <div class="metric-val" style="color:#f0f6fc;font-size:26px;">&#8377;6.11 L</div>
+    <div class="metric-delta" style="color:#06b6d4;font-size:11px;">&#8776; 30% on MTD PO</div>
   </div>
 </div>
 
@@ -449,16 +474,21 @@ iframe{border:none!important;}
     background: #161b22 !important;
     border: 1px solid #30363d !important;
     border-radius: 50% !important;
-    width: 32px !important;
-    height: 32px !important;
+    width: 36px !important;
+    height: 36px !important;
     color: #58a6ff !important;
-    font-size: 14px !important;
+    font-size: 16px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     box-shadow: 0 0 0 2px #21262d, 0 2px 8px rgba(0,0,0,0.4) !important;
     transition: background 0.2s, box-shadow 0.2s !important;
     padding: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    z-index: 9999 !important;
+    position: relative !important;
 }
 [data-testid="stSidebarCollapseButton"] button:hover,
 [data-testid="collapsedControl"] button:hover {
@@ -470,18 +500,22 @@ iframe{border:none!important;}
 [data-testid="collapsedControl"] button svg {
     color: #58a6ff !important;
     fill: #58a6ff !important;
-    width: 14px !important;
-    height: 14px !important;
+    width: 16px !important;
+    height: 16px !important;
 }
 [data-testid="stSidebarCollapseButton"] button:hover svg,
 [data-testid="collapsedControl"] button:hover svg {
     fill: #fff !important;
     color: #fff !important;
 }
-/* floating collapsed button position */
+/* floating collapsed button — always visible */
 [data-testid="collapsedControl"] {
     top: 14px !important;
     left: 8px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+    z-index: 9999 !important;
 }
 
 /* sidebar inner content spacing */
@@ -524,7 +558,7 @@ st.markdown("""
 with st.sidebar:
     st.markdown(
         f'<div style="text-align:center;padding:10px 0 18px;border-bottom:1px solid #21262d;position:relative;">'
-        f'<img src="data:image/png;base64,{LOGO_B64}" style="height:62px;object-fit:contain;filter:drop-shadow(0 0 8px rgba(230,57,70,0.25));"/>'
+        f'<img src="data:image/png;base64,{LOGO_B64}" style="height:88px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(230,57,70,0.35));"/>'
         f'<div style="color:#e63946;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-top:8px;">TIME MATTERS</div>'
         f'</div>',
         unsafe_allow_html=True,
@@ -552,6 +586,13 @@ with st.sidebar:
   <div class='s-row'><span class='s-lbl'>Joiners Today</span><span class='s-val g'>+5 &#9650;</span></div>
   <div class='s-row'><span class='s-lbl'>MTD</span><span class='s-val g'>+23 &#9650;</span></div>
   <div class='s-row'><span class='s-lbl'>Total PODs</span><span class='s-val b'>18</span></div>
+  <div class='s-sec' style='margin-top:16px;'>PO & MARGIN</div>
+  <div class='s-row'><span class='s-lbl'>Total PO (3,352 HC)</span><span class='s-val' style='color:#f97316;'>₹29.72 Cr</span></div>
+  <div class='s-row'><span class='s-lbl'>Total Margin (~30%)</span><span class='s-val' style='color:#22c55e;'>₹7.54 Cr</span></div>
+  <div class='s-row'><span class='s-lbl'>Today's PO (5)</span><span class='s-val' style='color:#f97316;'>₹4.43 L</span></div>
+  <div class='s-row'><span class='s-lbl'>Today's Margin</span><span class='s-val' style='color:#22c55e;'>₹1.33 L</span></div>
+  <div class='s-row'><span class='s-lbl'>MTD PO (23)</span><span class='s-val' style='color:#a855f7;'>₹20.38 L</span></div>
+  <div class='s-row'><span class='s-lbl'>MTD Margin</span><span class='s-val' style='color:#06b6d4;'>₹6.11 L</span></div>
   <div class='s-sec' style='margin-top:16px;'>HEADCOUNT</div>
   <div class='s-mini wh'><div class='lbl'>Total Workforce</div><div class='val'>3,168</div></div>
   <div class='s-mini green'><div class='lbl'>Today&#8217;s Joiners</div><div class='val'>+5 &#9650;</div></div>
@@ -563,4 +604,4 @@ with st.sidebar:
 """, unsafe_allow_html=True)
 
 html_content = build_dashboard_html()
-components.html(html_content, height=5400, scrolling=False)
+components.html(html_content, height=5650, scrolling=False)
