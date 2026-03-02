@@ -100,22 +100,22 @@ def build_dashboard_html():
         bar_w = loc["pct"] / max(l["pct"] for l in LOCATIONS) * 100
         loc_rows += f"""
         <tr>
-          <td style="padding:11px 14px;border-bottom:1px solid #21262d44;color:#c9d1d9;vertical-align:middle;">
+          <td style="padding:10px 10px;border-bottom:1px solid #21262d44;color:#c9d1d9;vertical-align:middle;">
             <span style="display:inline-flex;align-items:center;gap:8px;">
               <span style="width:10px;height:10px;border-radius:50%;background:{loc['color']};flex-shrink:0;display:inline-block;"></span>
               <strong style="color:#f0f6fc;">{loc['city']}</strong>
             </span>
           </td>
-          <td style="padding:11px 14px;border-bottom:1px solid #21262d44;vertical-align:middle;">
+          <td style="padding:10px 10px;border-bottom:1px solid #21262d44;vertical-align:middle;">
             <div style="display:flex;align-items:center;gap:10px;">
               <div style="flex:1;height:16px;background:#21262d;border-radius:4px;overflow:hidden;">
                 <div style="width:{bar_w:.1f}%;height:100%;background:{loc['color']};border-radius:4px;animation:bar-grow .9s ease-out forwards;animation-delay:{i*0.08:.2f}s;"></div>
               </div>
             </div>
           </td>
-          <td style="padding:11px 14px;border-bottom:1px solid #21262d44;color:#f0f6fc;font-weight:700;font-size:14px;text-align:right;vertical-align:middle;">{loc['count']:,}</td>
-          <td style="padding:11px 14px;border-bottom:1px solid #21262d44;text-align:right;vertical-align:middle;">
-            <span style="background:#21262d;color:{loc['color']};border:1px solid {loc['color']}44;border-radius:5px;padding:3px 9px;font-size:11px;font-weight:700;">{loc['pct']}%</span>
+          <td style="padding:10px 10px;border-bottom:1px solid #21262d44;color:#f0f6fc;font-weight:700;font-size:14px;text-align:right;vertical-align:middle;">{loc['count']:,}</td>
+          <td style="padding:10px 10px;border-bottom:1px solid #21262d44;text-align:right;vertical-align:middle;">
+            <span style="background:#21262d;color:{loc['color']};border:1px solid {loc['color']}44;border-radius:5px;padding:3px 7px;font-size:11px;font-weight:700;white-space:nowrap;">{loc['pct']}%</span>
           </td>
         </tr>"""
 
@@ -125,22 +125,22 @@ def build_dashboard_html():
         bar_w = exp["pct"] / max(e["pct"] for e in EXPERIENCE) * 100
         exp_rows += f"""
         <tr>
-          <td style="padding:11px 14px;border-bottom:1px solid #21262d44;color:#c9d1d9;vertical-align:middle;">
+          <td style="padding:10px 10px;border-bottom:1px solid #21262d44;color:#c9d1d9;vertical-align:middle;">
             <span style="display:inline-flex;align-items:center;gap:8px;">
               <span style="width:10px;height:10px;border-radius:3px;background:{exp['color']};flex-shrink:0;display:inline-block;"></span>
               <strong style="color:#f0f6fc;">{exp['band']}</strong>
             </span>
           </td>
-          <td style="padding:11px 14px;border-bottom:1px solid #21262d44;vertical-align:middle;">
+          <td style="padding:10px 10px;border-bottom:1px solid #21262d44;vertical-align:middle;">
             <div style="display:flex;align-items:center;gap:10px;">
               <div style="flex:1;height:16px;background:#21262d;border-radius:4px;overflow:hidden;">
                 <div style="width:{bar_w:.1f}%;height:100%;background:{exp['color']};border-radius:4px;animation:bar-grow .9s ease-out forwards;animation-delay:{i*0.08:.2f}s;"></div>
               </div>
             </div>
           </td>
-          <td style="padding:11px 14px;border-bottom:1px solid #21262d44;color:#f0f6fc;font-weight:700;font-size:14px;text-align:right;vertical-align:middle;">{exp['count']:,}</td>
-          <td style="padding:11px 14px;border-bottom:1px solid #21262d44;text-align:right;vertical-align:middle;">
-            <span style="background:#21262d;color:{exp['color']};border:1px solid {exp['color']}44;border-radius:5px;padding:3px 9px;font-size:11px;font-weight:700;">{exp['pct']}%</span>
+          <td style="padding:10px 10px;border-bottom:1px solid #21262d44;color:#f0f6fc;font-weight:700;font-size:14px;text-align:right;vertical-align:middle;">{exp['count']:,}</td>
+          <td style="padding:10px 10px;border-bottom:1px solid #21262d44;text-align:right;vertical-align:middle;">
+            <span style="background:#21262d;color:{exp['color']};border:1px solid {exp['color']}44;border-radius:5px;padding:3px 7px;font-size:11px;font-weight:700;white-space:nowrap;">{exp['pct']}%</span>
           </td>
         </tr>"""
 
@@ -225,12 +225,16 @@ body{{font-family:'Inter','Segoe UI',sans-serif;background:#0e1117;color:#fafafa
 /* ── DIST TABLES ── */
 .dist-row{{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px;}}
 .dist-box{{background:#161b22;border:1px solid #21262d;border-radius:10px;overflow:hidden;}}
+.dist-box table{{width:100%;table-layout:fixed;border-collapse:collapse;}}
 .dist-thead tr{{background:#21262d;}}
-.dist-thead th{{padding:11px 14px;text-align:left;font-size:11px;font-weight:600;color:#8b949e;text-transform:uppercase;letter-spacing:.8px;white-space:nowrap;}}
-.dist-thead th:nth-child(3),.dist-thead th:nth-child(4){{text-align:right;}}
+.dist-thead th{{padding:10px 10px;text-align:left;font-size:10px;font-weight:600;color:#8b949e;text-transform:uppercase;letter-spacing:.7px;white-space:nowrap;overflow:hidden;}}
+.dist-thead th:nth-child(1){{width:28%;}}
+.dist-thead th:nth-child(2){{width:34%;}}
+.dist-thead th:nth-child(3){{width:18%;text-align:right;}}
+.dist-thead th:nth-child(4){{width:20%;text-align:right;}}
 .dist-tbody tr:hover td{{background:#1c2128;}}
 .dist-tbody tr:last-child td{{border-bottom:none!important;}}
-.dist-total{{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#1c2128;border-top:1px solid #21262d;font-size:12px;color:#8b949e;}}
+.dist-total{{display:flex;justify-content:space-between;align-items:center;padding:10px 10px;background:#1c2128;border-top:1px solid #21262d;font-size:12px;color:#8b949e;}}
 .dist-total strong{{color:#f0f6fc;font-size:14px;}}
 
 /* ── POD GRID ── */
@@ -355,7 +359,7 @@ body{{font-family:'Inter','Segoe UI',sans-serif;background:#0e1117;color:#fafafa
       <thead class="dist-thead">
         <tr>
           <th>City</th>
-          <th style="min-width:120px;">Distribution</th>
+          <th>Distribution</th>
           <th>Headcount</th>
           <th>Share</th>
         </tr>
@@ -380,7 +384,7 @@ body{{font-family:'Inter','Segoe UI',sans-serif;background:#0e1117;color:#fafafa
       <thead class="dist-thead">
         <tr>
           <th>Experience</th>
-          <th style="min-width:120px;">Distribution</th>
+          <th>Distribution</th>
           <th>Headcount</th>
           <th>Share</th>
         </tr>
@@ -539,7 +543,7 @@ with st.sidebar:
     </div>
     <!-- Name below avatar -->
     <div style='font-size:14px;font-weight:700;color:#f0f6fc;'>Talent Intelligence</div>
-    <div style='font-size:11px;color:#8b949e;margin-top:3px;'>Founder&#8217;s Office &nbsp;&#183;&nbsp; Onboarding Competancy</div>
+    <div style='font-size:11px;color:#8b949e;margin-top:3px;'>Founder&#8217;s Office &nbsp;&#183;&nbsp; HR Analytics</div>
   </div>
   <div class='s-sec'>REPORT INFO</div>
   <div class='s-row'><span class='s-lbl'>Date</span><span class='s-val'>02 Mar 2026</span></div>
