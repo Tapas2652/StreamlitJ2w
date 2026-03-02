@@ -6,6 +6,7 @@ Run: pip install streamlit && streamlit run jtw_dashboard.py
 
 import streamlit as st
 import streamlit.components.v1 as components
+from datetime import datetime
 
 st.set_page_config(
     page_title="JTW Daily Onboarding Dashboard",
@@ -25,47 +26,48 @@ JOINERS = [
 ]
 
 PODS = [
-    ("p-java",      "☕","Java Ecosystem",                  "87",  True, "Java · Core Java · Java Backend · Spring Boot"),
-    ("p-frontend",  "🎨","Frontend Development",            "94",  True, "React.js · Angular · JavaScript · HTML5 · Node.js · UX Design"),
+    ("p-java",      "☕","Java Ecosystem",                  "97",  True, "Java · Core Java · Java Backend · Spring Boot"),
+    ("p-frontend",  "🎨","Frontend Development",            "106",  True, "React.js · Angular · JavaScript · HTML5 · Node.js · UX Design"),
     ("p-python",    "🐍","Python & Scripting",              "62",  False,"Python · Data Modelling"),
     ("p-analytics", "📊","Data Analytics & BI",             "78",  True, "Data Analyst · Tableau · Power BI · Crystal Report · HR Analytics · Financial Analysis · FP&A"),
     ("p-dataeng",   "🔧","Data Engineering & Big Data",     "55",  False,"Data Engineer · Big Data · Snowflake · ETL · MDM · Reference Data"),
     ("p-security",  "🔒","Security & Compliance",           "48",  False,"Cyber Security · Information Security · Application Security · Internal Audit"),
     ("p-automation","🤖","Automation & Testing",            "73",  False,"Selenium · Automation Testing · API Testing · ETL Testing · SDET · QA · RPA · Automation Anywhere · V&V"),
-    ("p-devops",    "☁️","DevOps & Cloud",                  "91",  True, "DevOps · Azure · AWS · Terraform · GitHub · Linux · SRE · VMware · VDI"),
+    ("p-devops",    "☁️","DevOps & Cloud",                  "99",  True, "DevOps · Azure · AWS · Terraform · GitHub · Linux · SRE · VMware · VDI"),
     ("p-biz",       "💼","Business & Functional Roles",     "66",  False,"Business Analyst · Accounts Payable · Recruitment · Talent Acquisition · Sales · Marketing · Pricing · Sourcing"),
     ("p-salesforce","🌩️","Salesforce & CRM",                "44",  False,"Salesforce · Salesforce Developer · Salesforce Testing · Microsoft Dynamics CRM · AEM"),
-    ("p-sap",       "🏭","SAP Functional & Technical",      "112", True, "SAP · SAP ABAP · SAP ABAP HANA · SAP HANA · SAP FI · SAP GRC · SAP Basis · SAP MDG · SAP PLM · SAP Ariba · SAP PI · SAP QM · SAP TM · SAP Security · SAP BW · SAP BODS"),
+    ("p-sap",       "🏭","SAP Functional & Technical",      "132", True, "SAP · SAP ABAP · SAP ABAP HANA · SAP HANA · SAP FI · SAP GRC · SAP Basis · SAP MDG · SAP PLM · SAP Ariba · SAP PI · SAP QM · SAP TM · SAP Security · SAP BW · SAP BODS"),
     ("p-database",  "🗄️","Database & Backend Systems",      "69",  False,"SQL · PL/SQL · Oracle · Oracle Cloud · Finacle · AS400 · WTX"),
     ("p-infra",     "🌐","Infrastructure & Networking",     "57",  False,"Networking · Network Engineer · Network Security · Cisco · Routing · IT Infrastructure · Desktop Support"),
-    ("p-appsupport","🛠️","Application / Production Support","83",  False,"Application Support · Production Support · Monitoring · ServiceNow · Service Desk Management · IT Asset Management · MFT · Middleware"),
+    ("p-appsupport","🛠️","Application / Production Support","87",  False,"Application Support · Production Support · Monitoring · ServiceNow · Service Desk Management · IT Asset Management · MFT · Middleware"),
     ("p-embedded",  "⚙️","Embedded & Core Engineering",     "41",  False,"Embedded C · C++ · COBOL · Firmware · Power Electronics · Mechanical Engineering · AutoCAD Architecture"),
     ("p-product",   "📦","Product & Delivery Management",   "48",  False,"Product Owner · Product Management · Program Manager · Scrum Master · SDM · SME · Consulting · Project Management · Agile"),
-    ("p-ites",      "🖥️","ITES",                          "1,750",False,"Information Technology Enabled Services"),
-    ("p-svc",       "🤝","Services",                        "310", False,"Managed Services · Professional Services · Consulting Services"),
+    ("p-ites",      "🖥️","ITES",                          "1,850",False,"Information Technology Enabled Services"),
+    ("p-svc",       "🤝","Services",                        "340", False,"Managed Services · Professional Services · Consulting Services"),
 ]
 
 # Location distribution data
 LOCATIONS = [
-    {"city": "Bangalore",  "count": 1142, "pct": 36.1, "color": "#3b82f6"},
-    {"city": "Hyderabad",  "count":  634, "pct": 20.0, "color": "#10b981"},
-    {"city": "Mumbai",     "count":  412, "pct": 13.0, "color": "#f97316"},
-    {"city": "Noida",      "count":  318, "pct": 10.0, "color": "#a855f7"},
-    {"city": "Lucknow",    "count":  190, "pct":  6.0, "color": "#f59e0b"},
-    {"city": "Others",     "count":  472, "pct": 14.9, "color": "#64748b"},
+    {"city": "Bangalore",  "count": 1196, "pct": 35.7, "color": "#3b82f6"},
+    {"city": "Hyderabad",  "count":  660, "pct": 19.7, "color": "#10b981"},
+    {"city": "Mumbai",     "count":  430, "pct": 12.8, "color": "#f97316"},
+    {"city": "Noida",      "count":  332, "pct":  9.9, "color": "#a855f7"},
+    {"city": "Lucknow",    "count":  200, "pct":  6.0, "color": "#f59e0b"},
+    {"city": "Others",     "count":  534, "pct": 15.9, "color": "#64748b"},
 ]
 
 # Experience distribution data
 EXPERIENCE = [
-    {"band": "0 – 1 Year",   "count":  285, "pct":  9.0, "color": "#22d3ee"},
-    {"band": "1 – 3 Years",  "count":  634, "pct": 20.0, "color": "#3b82f6"},
-    {"band": "3 – 5 Years",  "count":  792, "pct": 25.0, "color": "#10b981"},
-    {"band": "5 – 7 Years",  "count":  698, "pct": 22.0, "color": "#a855f7"},
-    {"band": "7 – 10 Years", "count":  507, "pct": 16.0, "color": "#f97316"},
-    {"band": "10 + Years",   "count":  252, "pct":  8.0, "color": "#f59e0b"},
+    {"band": "0 – 1 Year",   "count":  300, "pct":  9.0, "color": "#22d3ee"},
+    {"band": "1 – 3 Years",  "count":  665, "pct": 19.8, "color": "#3b82f6"},
+    {"band": "3 – 5 Years",  "count":  832, "pct": 24.8, "color": "#10b981"},
+    {"band": "5 – 7 Years",  "count":  732, "pct": 21.8, "color": "#a855f7"},
+    {"band": "7 – 10 Years", "count":  530, "pct": 15.8, "color": "#f97316"},
+    {"band": "10 + Years",   "count":  293, "pct":  8.7, "color": "#f59e0b"},
 ]
 
 def build_dashboard_html():
+    today_str = datetime.now().strftime("%A, %d %B %Y")
     joiner_rows = ""
     for j in JOINERS:
         joiner_rows += f"""
@@ -292,8 +294,8 @@ body{{font-family:'Inter','Segoe UI',sans-serif;background:#f0f4f8;color:#1e293b
   </div>
   <!-- RIGHT: Date + Live -->
   <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0;">
-    <div style="background:#e2e8f0;border:1px solid #cbd5e1;color:#475569;border-radius:6px;padding:5px 14px;font-size:12px;font-weight:500;">&#128197; Monday, 02 March 2026</div>
-    <div style="background:#dcfce7;border:1px solid #86efac;color:#16a34a;border-radius:6px;padding:5px 13px;font-size:12px;font-weight:600;display:inline-flex;align-items:center;gap:7px;"><div style="width:9px;height:9px;background:#16a34a;border-radius:50%;animation:pulse-live 1.5s ease-in-out infinite;flex-shrink:0;"></div>Live · Auto-refreshed</div>
+    <div style="background:#e2e8f0;border:1px solid #cbd5e1;color:#475569;border-radius:6px;padding:5px 14px;font-size:12px;font-weight:500;">&#128197; {today_str}</div>
+    <div style="background:#dcfce7;border:1px solid #86efac;color:#16a34a;border-radius:6px;padding:5px 13px;font-size:12px;font-weight:600;display:inline-flex;align-items:center;gap:7px;"><div style="width:9px;height:9px;background:#16a34a;border-radius:50%;animation:pulse-live 1.5s ease-in-out infinite;flex-shrink:0;"></div>Last refreshed at <span id="refresh-time">11:00 AM</span></div>
   </div>
 </div>
 
@@ -315,7 +317,7 @@ body{{font-family:'Inter','Segoe UI',sans-serif;background:#f0f4f8;color:#1e293b
   </div>
   <div class="metric b">
     <div class="metric-lbl">Total Headcount</div>
-    <div class="metric-val">3,168</div>
+    <div class="metric-val">3,352</div>
     <div class="metric-delta" style="color:#58a6ff;">All active PODs</div>
   </div>
   <div class="metric">
@@ -358,7 +360,7 @@ body{{font-family:'Inter','Segoe UI',sans-serif;background:#f0f4f8;color:#1e293b
 <div class="hc-bar">
   <div>
     <div class="hc-label">&#127962; Joulestowatts &#8212; Total Workforce (Live)<div class="red-dot"></div></div>
-    <div class="hc-num">3,168 <span class="sub">&amp; counting</span>
+    <div class="hc-num">3,352 <span class="sub">&amp; counting</span>
       <span class="wave-dots"><span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></span>
     </div>
   </div>
@@ -405,7 +407,7 @@ body{{font-family:'Inter','Segoe UI',sans-serif;background:#f0f4f8;color:#1e293b
     </table>
     <div class="dist-total">
       <span>Total Workforce</span>
-      <strong>3,168</strong>
+      <strong>3,352</strong>
     </div>
   </div>
 
@@ -430,7 +432,7 @@ body{{font-family:'Inter','Segoe UI',sans-serif;background:#f0f4f8;color:#1e293b
     </table>
     <div class="dist-total">
       <span>Total Workforce</span>
-      <strong>3,168</strong>
+      <strong>3,352</strong>
     </div>
   </div>
 
@@ -465,6 +467,23 @@ body{{font-family:'Inter','Segoe UI',sans-serif;background:#f0f4f8;color:#1e293b
   setTimeout(sendHeight,300);
   setTimeout(sendHeight,800);
 }})();
+</script>
+
+<script>
+// Auto-update refresh time display
+function updateRefreshTime() {{
+    var now = new Date();
+    var hours = now.getHours();
+    var minutes = now.getMinutes();
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var timeStr = hours + ':' + minutes + ' ' + ampm;
+    var el = document.getElementById('refresh-time');
+    if (el) {{ el.textContent = timeStr; }}
+}}
+updateRefreshTime();
 </script>
 </body></html>"""
 
